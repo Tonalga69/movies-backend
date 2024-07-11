@@ -26,6 +26,7 @@ public class SecurityConfig {
                 .securityMatcher(request -> request.getServletPath().startsWith("/api/v1/"))
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                         .requestMatchers("/api/v1/user/**").permitAll()
+                        .requestMatchers("/api/v1/auth/**").permitAll()
                         .requestMatchers("/api/v1/user/admin/**").hasRole("Role_Admin")
                         .anyRequest().authenticated()
                 )

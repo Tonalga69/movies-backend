@@ -2,10 +2,13 @@ package com.example.demo.auth.entities;
 
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
-@Builder
+@Data
+@NoArgsConstructor
 public class LoginResponse {
-    private final String token;
+    private  String token;
+    private  String message;
 }

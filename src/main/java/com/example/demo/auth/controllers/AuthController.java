@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/auth")
 public class AuthController {
 
-    @PostMapping("/login")
-    public ResponseEntity<LoginResponse> login(@RequestBody @Validated LoginRequest loginRequest) {
-        return ResponseEntity.ok(new LoginResponse("Login Successful"));
+    @PostMapping(path = "/login", consumes = "application/json", produces = "application/json")
+    private ResponseEntity<LoginResponse> login(@RequestBody @Validated LoginRequest loginRequest) {
+        return ResponseEntity.ok(new LoginResponse("some-token", "Login Successful"));
     }
 
     @PostMapping("/logout")
-    public String logout() {
+    private String logout() {
         return "Logout";
     }
 }
