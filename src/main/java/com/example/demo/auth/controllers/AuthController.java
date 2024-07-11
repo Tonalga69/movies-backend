@@ -3,7 +3,7 @@ package com.example.demo.auth.controllers;
 
 import com.example.demo.auth.entities.LoginRequest;
 import com.example.demo.auth.entities.LoginResponse;
-import com.example.demo.config.JWTIssuer;
+import com.example.demo.config.jwt.JWTIssuer;
 import com.example.demo.user.entities.User;
 import com.example.demo.user.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -35,7 +35,7 @@ public class AuthController {
             return ResponseEntity.badRequest().body(new LoginResponse(null,"User not found"));
         }
         if (!user.getPassword().equals(loginRequest.getPassword())){
-            return ResponseEntity.badRequest().body(new LoginResponse("","User not found"));
+            return ResponseEntity.badRequest().body(new LoginResponse(null,"User not found"));
         }
         final String token = jwtIssuer.issueToken(user.getId(), user.getEmail(), List.of(user.getUserRole()));
         return ResponseEntity.ok(new LoginResponse(token, "Login Successful"));

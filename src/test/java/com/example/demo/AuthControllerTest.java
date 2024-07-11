@@ -35,4 +35,30 @@ public class AuthControllerTest {
                 .andExpect(jsonPath("$.message").value("Login Successful"));
 
     }
+
+    @Test
+    public void loginShouldReturnBadRequest() throws Exception {
+        ObjectMapper objectMapper = new ObjectMapper();
+        String json = objectMapper.writeValueAsString(new LoginRequest("noexistinguser@test.com", "password1"));
+        mockMvc.perform(post("/api/v1/auth/login")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(json))
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.token").doesNotExist())
+                .andExpect(jsonPath("$.message").value("User not found"));
+    }
+
+    @Test void loginShouldReturnBadRequestForWrongPassword() throws Exception {
+        ObjectMapper objectMapper = new ObjectMapper();
+        String json = objectMapper.writeValueAsString(new LoginRequest("userthree@example.com", "password"));
+        mockMvc.perform(post("/api/v1/auth/login")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(json))
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.token").doesNotExist())
+                .andExpect(jsonPath("$.message").value("User not found"));
+    }
+
 }

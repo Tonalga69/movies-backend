@@ -1,4 +1,4 @@
-package com.example.demo.config;
+package com.example.demo.config.jwt;
 
 
 import com.auth0.jwt.JWT;
@@ -9,6 +9,8 @@ import java.util.List;
 
 @Component
 public class JWTIssuer {
+
+
 
     public String issueToken(Long id, String email, List<String> roles) {
         return JWT.create()
