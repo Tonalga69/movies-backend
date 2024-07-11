@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 public class JWTDecoder {
 
     public DecodedJWT decodeToken(String token) {
-        return JWT.require(Algorithm.HMAC256("secret"))
+        return JWT.require(Algorithm.HMAC256("keytooolagrahakhojkarlofwknfvoqsdkokdvdnvvoqrf"))
                 .build()
                 .verify(token);
     }

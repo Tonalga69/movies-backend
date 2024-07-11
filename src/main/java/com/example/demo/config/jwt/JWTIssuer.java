@@ -18,6 +18,6 @@ public class JWTIssuer {
                 .withClaim("email", email)
                 .withClaim("roles", roles)
                 .withExpiresAt(new java.util.Date(System.currentTimeMillis() + 3600000))
-                .sign(Algorithm.HMAC256("secret")); //dummy secret
+                .sign(Algorithm.HMAC256("keytooolagrahakhojkarlofwknfvoqsdkokdvdnvvoqrf")); //dummy secret
     }
 }
