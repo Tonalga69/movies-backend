@@ -19,6 +19,8 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
+
+
     @GetMapping("/")
     private ResponseEntity<List<User>> getAllUsers() {
         final List<User> users = userRepository.findAll();
@@ -46,5 +48,8 @@ public class UserController {
         users.forEach(user -> user.setPassword(""));
         return ResponseEntity.ok(users);
     }
+
+
+
 
 }
