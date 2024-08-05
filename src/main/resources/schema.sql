@@ -9,3 +9,12 @@ create table if not exists "user" (
 
 
 );
+
+create table if not exists "movie"(
+    id bigint not null auto_increment,
+    title varchar(255),
+    genre varchar(255),
+    director varchar(255),
+    release_date date,
+    primary key (id)
+);
