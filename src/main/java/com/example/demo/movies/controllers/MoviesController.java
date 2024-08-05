@@ -3,13 +3,16 @@ package com.example.demo.movies.controllers;
 
 import com.example.demo.movies.entities.Movie;
 import com.example.demo.movies.repositories.MoviesRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController("/api/v1/movie")
+@RestController
+@RequestMapping("/api/v1/movie")
+@RequiredArgsConstructor
 public class MoviesController {
 
     @Autowired
