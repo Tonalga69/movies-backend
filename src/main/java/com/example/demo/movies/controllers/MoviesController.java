@@ -2,6 +2,7 @@ package com.example.demo.movies.controllers;
 
 
 import com.example.demo.movies.entities.Movie;
+import com.example.demo.movies.entities.MovieRequest;
 import com.example.demo.movies.repositories.MoviesRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,19 +38,19 @@ public class MoviesController {
         return ResponseEntity.ok(movie);
     }
 
-    @PostMapping("/admin/")
-    public ResponseEntity<Movie> addMovie( @RequestBody  Movie movie) {
-        final Movie savedMovie = moviesRepository.save(movie);
+    @PostMapping("/")
+    public ResponseEntity<Movie> addMovie(@RequestBody MovieRequest movie) {
+        final Movie savedMovie = moviesRepository.save(new Movie(null, movie.getTitle(), movie.getGenre(), movie.getDirector(), movie.getReleaseDate()));
         return ResponseEntity.ok(savedMovie);
     }
 
-    @PutMapping("/admin/")
+    @PutMapping("/")
     public ResponseEntity<Movie> updateMovie(@RequestBody Movie movie) {
         final Movie updatedMovie = moviesRepository.save(movie);
         return ResponseEntity.ok(updatedMovie);
     }
 
-    @PostMapping("/admin/{id}")
+    @PostMapping("/{id}")
     public ResponseEntity<String> deleteMovie(@PathVariable Long id) {
         moviesRepository.deleteById(id);
         return ResponseEntity.ok("Movie deleted");

@@ -32,6 +32,7 @@ public class MoviesControllerTest {
                 .andExpect(status().isOk());
     }
 
+
     @Test
     public void getMovieByIdShouldReturnMovie() throws Exception {
         mockMvc.perform(get("/api/v1/movie/2"))
@@ -45,7 +46,7 @@ public class MoviesControllerTest {
     public void addMovieShouldReturnMovie() throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
         String json = objectMapper.writeValueAsString(new MovieRequest("Movie Five", "Action", "Director Five", new Date()));
-        mockMvc.perform(post("/api/v1/movie/admin/")
+        mockMvc.perform(post("/api/v1/movie/")
                         .contentType("application/json")
                         .content(json))
                 .andDo(print())
@@ -57,7 +58,7 @@ public class MoviesControllerTest {
     public void updateMovieShouldReturnMovie() throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
         String json = objectMapper.writeValueAsString(new Movie(1L, "Movie changed", "Action", "Director One", new Date()));
-        mockMvc.perform(post("/api/v1/movie/admin/")
+        mockMvc.perform(post("/api/v1/movie/")
                         .contentType("application/json")
                         .content(json))
                 .andDo(print())
@@ -67,7 +68,7 @@ public class MoviesControllerTest {
 
     @Test
     public void deleteMovieShouldReturnMessage() throws Exception {
-        mockMvc.perform(post("/api/v1/movie/admin/3"))
+        mockMvc.perform(post("/api/v1/movie/3"))
                 .andDo(print())
                 .andExpect(jsonPath("$").value("Movie deleted"))
                 .andExpect(status().isOk());
