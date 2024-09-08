@@ -11,8 +11,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 public class DemoApplication {
 
 	public static void main(String[] args) {
-
-		Dotenv dotenv = Dotenv.configure().directory("./").load();
 		SpringApplication.run(DemoApplication.class, args);
 	}
 
