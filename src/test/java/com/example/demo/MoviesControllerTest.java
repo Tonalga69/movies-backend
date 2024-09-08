@@ -28,7 +28,7 @@ public class MoviesControllerTest {
     public void getAllMoviesShouldReturnMovies() throws Exception {
         mockMvc.perform(get("/api/v1/movie/all"))
                 .andDo(print())
-                .andExpect(jsonPath("$.length()").value(4))
+                .andExpect(jsonPath("$.length()").value(5))
                 .andExpect(status().isOk());
     }
 
