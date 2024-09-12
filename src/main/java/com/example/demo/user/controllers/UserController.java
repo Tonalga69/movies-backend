@@ -1,6 +1,7 @@
 package com.example.demo.user.controllers;
 
 
+import com.example.demo.user.DTOs.UserDTO;
 import com.example.demo.user.entities.User;
 import com.example.demo.user.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,34 +17,32 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-
-
-    @GetMapping("/")
-    private ResponseEntity<List<User>> getAllUsers() {
+    @GetMapping("/all")
+    private ResponseEntity<List<UserDTO>> getAllUsers() {
         final List<User> users = userRepository.findAll();
-        if (users.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.ok(users);
+        final List<UserDTO> userDTOS= users.stream().map(UserDTO::fromUser).toList();
+        return ResponseEntity.ok(userDTOS);
     }
+
+
+
     @GetMapping("/{id}")
-    private ResponseEntity<User> getUserById(@PathVariable Long id) {
+    private ResponseEntity<UserDTO> getUserById(@PathVariable Long id) {
         final User user = userRepository.findById(id).orElse(null);
         if (user == null) {
             return ResponseEntity.notFound().build();
         }
-        user.setPassword("");
-        return ResponseEntity.ok(user);
+        return ResponseEntity.ok(UserDTO.fromUser(user));
     }
 
     @GetMapping("/role/{role}")
-    private ResponseEntity<List<User>> getUserByName(@PathVariable String role) {
+    private ResponseEntity<List<UserDTO>> getUserByName(@PathVariable String role) {
         final List<User> users = userRepository.findByUserRole(role).orElse(null);
         if (users==null || users.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
-        users.forEach(user -> user.setPassword(""));
-        return ResponseEntity.ok(users);
+        final List<UserDTO> userDTOS= users.stream().map(UserDTO::fromUser).toList();
+        return ResponseEntity.ok(userDTOS);
     }
 
 
