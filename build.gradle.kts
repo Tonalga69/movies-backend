@@ -42,6 +42,10 @@ dependencies {
 	implementation("io.github.cdimascio:dotenv-java:3.0.2")
 	// https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
 	implementation("com.fasterxml.jackson.core:jackson-databind:2.17.2")
+	// https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui
+	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0")
+
+
 
 }
 
